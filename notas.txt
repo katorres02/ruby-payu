@@ -1,0 +1,12 @@
+PLAN:
+	Toda la información del plan, días de trial, duración del plan, frecuencia de cobro, valor descripción.
+
+CLIENTE:
+	Un cliente es la unidad que identifica quien será el beneficiario de un producto o servicio prestado y que se encuentra asociado a un plan de pagos recurrentes.  
+
+TARJETA DE CREDITO: 
+	medio de pago del cliente
+
+SUSCRIPCIÓN
+	asociación de plan, cliente y tarjeta
+
