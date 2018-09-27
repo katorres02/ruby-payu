@@ -6,8 +6,13 @@ module PayuLatam
     # in order to take the correct url
     def initialize(id=nil)
       url
+      @params = empty_object
       return if id.nil?
       load(id)
+    end
+
+    def empty_object
+      { 'fullName'=> '', 'email'=> '' }
     end
 
     def url

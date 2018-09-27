@@ -2,7 +2,7 @@ module PayuLatam
   require "base64"
 
   class << self
-    attr_accessor :api_login, :api_key, :sandbox
+    attr_accessor :api_login, :api_key, :account_id, :sandbox
     attr_reader   :base_url
     
     def configure(&block)
@@ -31,28 +31,34 @@ require_relative 'payu_latam/card'
 
 
 PayuLatam.configure do |x|
-  x.api_login = 'pRRXKOl8ikMmt9u'
-  x.api_key   = '4Vj8eK4rloUd272L48hsrarnUA'
-  #x.api_login = 'M5xsYdg0Eqy7G8E'
-  #x.api_key   = '33PQf6l0o8RWHC1hgxmMs6WWkZ'
+  x.api_login  = 'pRRXKOl8ikMmt9u'
+  x.api_key    = '4Vj8eK4rloUd272L48hsrarnUA'
+  x.account_id = '512321'
   x.sandbox   = true
 end
 
-#merchant_id = 758556
-
+# CLIENT CRUD
+=begin
 client = PayuLatam::Client.new
-#{fullName: 'Carlos', email: 'carlos@mail.com'}
-p client.url
-puts a = "#{PayuLatam.api_login}:#{PayuLatam.api_key}"
-puts PayuLatam.authorization
-puts ""
+client.params = {fullName: 'Carlos', email: 'carlos@mail.com'}
+client.create!
+client.load(client.resource['id'])
+client.update({fullName: 'Carlos editado'})
+client.delete
+client.resource
+=end
 
-#client.create
-client = PayuLatam::Client.new('b4bd65e1fqjf')
-p client.response
+# PLAN CRUD
+=begin
+plan = PayuLatam::Plan.new
+plan.create!
+plan.load(plan.resource['planCode'])
+plan.update(description: 'test')
+plan.delete
+plan.resource
+=end
+
 pry
-client.show(client.response['id'])
-
 
 
 

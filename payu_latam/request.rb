@@ -17,8 +17,8 @@ module PayuLatam
       @http_verb = 'Put'
       @url += id.to_s
 
-      @params = params if params
-      params.merge!({id: id})
+      @params = params if !params.empty?
+      @params.merge!({id: id}) if id
 
       http
       @resource = @response if @response
@@ -41,8 +41,6 @@ module PayuLatam
     def success?
       @error.nil?
     end
-
-    protected
 
     def id
       raise ArgumentError, 'customer is nil' if @resource.nil?
@@ -80,7 +78,11 @@ module PayuLatam
       reset_url
       
       if request.is_a?(Net::HTTPSuccess)
-        @response = JSON.parse(request.body)
+        begin
+          @response = JSON.parse(request.body)
+        rescue
+          @response = request.body
+        end
         @error = nil
       else
         @response = nil
