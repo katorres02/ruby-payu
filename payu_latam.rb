@@ -69,7 +69,13 @@ puts "Card: "
 p card.resource
 puts ""
 
-client.cards.push(card.resource)
+card_obj = card.resource
+card_obj.delete('address')
+card_obj.delete('type')
+card_obj.delete('number')
+card_obj.delete('customerId')
+
+client.cards.push(card_obj)
 
 # SUSCRIPTION CRUD
 subscription = PayuLatam::Subscription.new(plan, client, '')

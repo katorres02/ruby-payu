@@ -1,13 +1,14 @@
 module PayuLatam
   class Subscription < Request
-    attr_reader :url, :plan, :client, :callback_url
+    attr_reader :url, :plan, :client, :card
     attr_accessor :resource, :params
 
     def initialize(plan, client, callback_url)
-      @plan = plan
+      @plan   = plan.resource
       @client = client
-      @callback_url = callback_url || ''
+      @callback_url = callback_url
       @params = empty_object
+      url
     end
 
     def url
@@ -20,15 +21,17 @@ module PayuLatam
       {
         "quantity": "1",
         "installments": "1",
-        "trialDays": "0",
         "immediatePayment": true,
         "customer": {
           "fullName": @client.resource['fullName'],
           "email": @client.resource['email'],
           "creditCards": @client.cards
         },
-        "plan": @plan.resource,
-        "notifyUrl": @callback_url
+        "plan": {
+          "planCode": @plan['planCode'],
+          "maxPendingPayments": "1",
+        },
+        "notifyUrl": 'http://www.test.com/confirmation'
       }
     end
   end
