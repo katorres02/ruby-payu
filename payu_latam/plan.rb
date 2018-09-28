@@ -11,7 +11,6 @@ module PayuLatam
       load(id)
     end
 
-
     def update(params={})
       @http_verb = 'Put'
       @url += id.to_s
@@ -26,6 +25,12 @@ module PayuLatam
       raise ArgumentError, 'plan is nil' if @resource.nil?
       @resource['planCode'] if @resource
     end
+
+    def url
+      @url = PayuLatam.base_url + '/rest/v4.9/plans/'
+    end
+
+    private
 
     def empty_object
       {
@@ -44,10 +49,6 @@ module PayuLatam
           }
         ]
       }
-    end
-
-    def url
-      @url = PayuLatam.base_url + '/rest/v4.9/plans/'
     end
   end
 end

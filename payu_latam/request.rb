@@ -42,6 +42,10 @@ module PayuLatam
       @error.nil?
     end
 
+    def fail?
+      !@error.nil?
+    end
+
     def id
       raise ArgumentError, 'customer is nil' if @resource.nil?
       @resource['id'] if @resource

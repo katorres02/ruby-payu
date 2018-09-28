@@ -28,6 +28,7 @@ require_relative 'payu_latam/request'
 require_relative 'payu_latam/plan'
 require_relative 'payu_latam/client'
 require_relative 'payu_latam/card'
+require_relative 'payu_latam/subscription'
 
 
 PayuLatam.configure do |x|
@@ -38,27 +39,41 @@ PayuLatam.configure do |x|
 end
 
 # CLIENT CRUD
-=begin
+
 client = PayuLatam::Client.new
 client.params = {fullName: 'Carlos', email: 'carlos@mail.com'}
 client.create!
 client.load(client.resource['id'])
-client.update({fullName: 'Carlos editado'})
-client.delete
-client.resource
-=end
+#client.update({fullName: 'Carlos editado'})
+#client.delete
+puts "Cliente: "
+p client.resource
+puts ""
 
 # PLAN CRUD
-=begin
+
 plan = PayuLatam::Plan.new
 plan.create!
 plan.load(plan.resource['planCode'])
-plan.update(description: 'test')
-plan.delete
-plan.resource
-=end
+#plan.update(description: 'test')
+#plan.delete
+puts "Plan: "
+p plan.resource
+puts ""
+
+# CREDIT CARD CRUD
+card = PayuLatam::Card.new(client)
+card.create!
+card.load(card.resource['token'])
+puts "Card: "
+p card.resource
+puts ""
+
+client.cards.push(card.resource)
+
+# SUSCRIPTION CRUD
+subscription = PayuLatam::Subscription.new(plan, client, '')
 
 pry
-
 
 
