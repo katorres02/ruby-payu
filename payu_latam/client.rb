@@ -1,7 +1,7 @@
 module PayuLatam
   class Client < Request
-    attr_reader :url, :card
-    attr_accessor :resource, :params, :cards
+    attr_reader :url, :cards
+    attr_accessor :resource, :params
 
     # in order to take the correct url
     def initialize(id=nil)
@@ -18,6 +18,11 @@ module PayuLatam
 
     def url
       @url = PayuLatam.base_url + '/rest/v4.9/customers/'
+    end
+
+    # respuesta de creación de tarjetas de tipo {"token"=>"381e8708-b46e-4f1a-adb2-a0ac4a2ae099"}
+    def add_card(card)
+      @cards.push(card)
     end
 
     private

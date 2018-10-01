@@ -64,22 +64,19 @@ puts ""
 # CREDIT CARD CRUD
 card = PayuLatam::Card.new(client)
 card.create!
-card.load(card.resource['token'])
 puts "Card: "
 p card.resource
 puts ""
 
-card_obj = card.resource
-card_obj.delete('address')
-card_obj.delete('type')
-card_obj.delete('number')
-card_obj.delete('customerId')
-
-client.cards.push(card_obj)
+client.add_card(card.resource)
 
 # SUSCRIPTION CRUD
 subscription = PayuLatam::Subscription.new(plan, client, '')
+subscription.create!
+puts "Subscripción: "
+p subscription.resource
+puts ""
 
 pry
 
-
+c

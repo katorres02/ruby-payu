@@ -63,7 +63,7 @@ module PayuLatam
       {
         "name": "Sample User Name",
         "document": "1020304050",
-        "number": "4242434242424242",
+        "number": "4242424242424242",
         "expMonth": "01",
         "expYear": "2020",
         "type": "VISA",
