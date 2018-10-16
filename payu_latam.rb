@@ -29,6 +29,7 @@ require_relative 'payu_latam/plan'
 require_relative 'payu_latam/client'
 require_relative 'payu_latam/card'
 require_relative 'payu_latam/subscription'
+require_relative 'payu_latam/invoice'
 
 
 PayuLatam.configure do |x|
@@ -40,43 +41,43 @@ end
 
 # CLIENT CRUD
 
-client = PayuLatam::Client.new
-client.params = {fullName: 'Carlos', email: 'carlos@mail.com'}
-client.create!
-client.load(client.resource['id'])
+#client = PayuLatam::Client.new
+#client.params = {fullName: 'Carlos', email: 'carlos@mail.com'}
+#client.create!
+#client.load(client.resource['id'])
 #client.update({fullName: 'Carlos editado'})
 #client.delete
-puts "Cliente: "
-p client.resource
-puts ""
+#puts "Cliente: "
+#p client.resource
+#puts ""
 
 # PLAN CRUD
 
-plan = PayuLatam::Plan.new
-plan.create!
-plan.load(plan.resource['planCode'])
+#plan = PayuLatam::Plan.new
+#plan.create!
+#plan.load(plan.resource['planCode'])
 #plan.update(description: 'test')
 #plan.delete
-puts "Plan: "
-p plan.resource
-puts ""
+#puts "Plan: "
+#p plan.resource
+#puts ""
 
 # CREDIT CARD CRUD
-card = PayuLatam::Card.new(client)
-card.create!
-puts "Card: "
-p card.resource
-puts ""
+#card = PayuLatam::Card.new(client)
+#card.create!
+#puts "Card: "
+#p card.resource
+#puts ""
 
-client.add_card(card.resource)
+#client.add_card(card.resource)
 
 # SUSCRIPTION CRUD
-subscription = PayuLatam::Subscription.new(plan, client, '')
-subscription.create!
-puts "Subscripción: "
-p subscription.resource
-puts ""
+#subscription = PayuLatam::Subscription.new(plan, client, '')
+#subscription.create!
+#puts "Subscripción: "
+#p subscription.resource
+#puts ""
 
-pry
+#a = PayuLatam::Invoice.new(subscriptionId: '990ffs7y9j1z')
+binding.pry
 
-c
